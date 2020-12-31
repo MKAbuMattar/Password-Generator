@@ -2,11 +2,14 @@
 
 # Password Generator
 
+> # Passwords are only generated on the client's browser.
+
 ### Easy way to password generator
 
 - Offline version
 - Uppercase
 - Lowercase
 - Numbers
+- Symbols
 
 The wrong way to do a good job.
