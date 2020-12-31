@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+* {
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+
+}
+
+html,
+body {
+    background: #FBAB7E;
+    background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}
+
+.box {
+    background: rgba(19, 35, 47, 0.9);
+    padding: 40px;
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.title {
+    padding: 0;
+    margin: 0 0 25px 0;
+    user-select: none;
+}
+
+.title:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.title h1 {
+    display: block;
+    padding: 15px;
+    font-size: 1.8rem;
+    text-align: center;
+    background-color: #FF9A8B;
+    background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+    color: rgba(255, 255, 255, 1);
+}
+
+.screen {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.output,
+#passlength {
+    background: rgb(77, 76, 76);
+    width: 60%;
+    height: 50px;
+    overflow: auto;
+    margin: 0 20px;
+    padding: 10px 7px;
+    font-size: 17px;
+    z-index: 10;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 12px;
+    background-color: #FF9A8B;
+    background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+    color: rgba(255, 255, 255, 1);
+    user-select: none;
+}
+
+.btn:hover {
+    background-color: #FF9A8B;
+    background-image: linear-gradient(30deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.items {}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    color: rgba(255, 255, 255, 1);
+}
+
+#passlength {}
+
+footer {
+    text-align: center;
+    padding: 0 0 2em 0;
+    font-size: 0.8rem;
+}
+
+footer a {
+    text-decoration: none;
+    color: rgba(213, 33, 40, 1);
+}
