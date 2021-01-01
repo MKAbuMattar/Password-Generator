@@ -1,4 +1,4 @@
-const cacheName = 'password-generator-v1';
+const cacheName = 'password-generator-v2';
 const staticAssets = [
     './',
     './index.html',
