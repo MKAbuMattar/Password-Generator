@@ -20,17 +20,114 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body id="app">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0CMCCPTP5Y"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<body>
+    <div class="floating">
+        <button class="floating__btn add-button" title="Install App" style="display: block;">
+            <svg height="48" width="48" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" id="install__app"
+                    d="M8 7C8 4.23858 10.2386 2 13 2H35C37.7614 2 40 4.23858 40 7V41C40 43.7614 37.7614 46 35 46H13C10.2386 46 8 43.7614 8 41V7ZM13 6C12.4477 6 12 6.44772 12 7V41C12 41.5523 12.4477 42 13 42H35C35.5523 42 36 41.5523 36 41V7C36 6.44772 35.5523 6 35 6H13ZM18 10C18 9.44772 18.4477 9 19 9H29C29.5523 9 30 9.44772 30 10V12C30 12.5523 29.5523 13 29 13H19C18.4477 13 18 12.5523 18 12V10ZM24 39C25.6569 39 27 37.6569 27 36C27 34.3431 25.6569 33 24 33C22.3431 33 21 34.3431 21 36C21 37.6569 22.3431 39 24 39Z">
+                </path>
+            </svg>
+        </button>
+    </div>
 
-      gtag('config', 'G-0CMCCPTP5Y');
-    </script>
-    <noscript>Your browser does not support JavaScript!</noscript>
+    <section class="box">
+        <ul class="tab__group">
+            <li class="tab active" id="password__generator__tab">
+                <button class="btn tab__btn" id="password__generator__btn">Password Generator</button>
+            </li>
+            <li class="tab" id="password__checkup__tab">
+                <button class="btn tab__btn" id="password__checkup__btn">Password Checkup</button>
+            </li>
+        </ul>
+
+        <div id="password__generator__box">
+
+            <div class="title">
+                <h1>Password Generator</h1>
+            </div>
+
+            <div class="result__box">
+                <input type="text" id="result" placeholder="New Password Generator" readonly="">
+                <button id="copy" class="btn">Copy</button>
+            </div>
+
+            <div class="alert__box">
+                <span class="alert" id="alert">
+                    <span class="message" id="message"></span>
+                </span>
+            </div>
+
+            <div class="btn__settings">
+                <button id="settings__btn" class="btn">Settings</button>
+            </div>
+
+            <div class="items items__hide" id="settings">
+                <div class="item">
+                    <label>Password Length :</label>
+                    <input type="number" placeholder="Password Length" min="6" value="20" id="password__length">
+                </div>
+                <div class="item">
+                    <label for="uppercase">Include Uppercase :</label>
+                    <input type="checkbox" id="uppercase" checked>
+                </div>
+                <div class="item">
+                    <label for="lowercase">Include Lowercase :</label>
+                    <input type="checkbox" id="lowercase" checked>
+                </div>
+                <div class="item">
+                    <label for="numbers">Include Numbers :</label>
+                    <input type="checkbox" id="numbers" checked>
+                </div>
+                <div class="item">
+                    <label for="symbols">Include Symbols :</label>
+                    <input type="checkbox" id="symbols" checked>
+                </div>
+                <div class="item">
+                    <label>Custom Characters :</label>
+                    <input type="text" placeholder="Custom Characters" id="custom__characters">
+                </div>
+            </div>
+
+            <div class="btn__box">
+                <button id="generate" class="btn btn__block">Generate Password</button>
+            </div>
+        </div>
+
+        <div id="password__checkup__box" class="box__hide">
+
+            <div class="title">
+                <h1>Password Checkup</h1>
+            </div>
+
+            <div class="items">
+                <div class="item">
+                    <label>Enter Password:</label>
+                    <input type="text" placeholder="Enter Password" id="check__password">
+                </div>
+            </div>
+
+            <div class="alert__box">
+                <span class="alert" id="alert__check__password">
+                    <span class="message" id="message__check__password"></span>
+                </span>
+            </div>
+
+            <div class="btn__box">
+                <button id="password__checkup" class="btn btn__block">Password Checkup</button>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>
+            All Copyrights Reserved © 2020
+            <script>
+                new Date().getFullYear() > 2020 && document.write(" - " + new Date().getFullYear());
+            </script>,
+            Made With <mark>❤</mark> &amp; a lot ☕ By
+            <a href="https://mkabumattar.github.io/">MohammadKhaled Abu Mattar</a>
+        </p>
+    </footer>
     <script src="./assets/js/script.js"></script>
 </body>
 
