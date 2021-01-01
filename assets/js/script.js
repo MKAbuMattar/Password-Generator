@@ -150,6 +150,12 @@ settingsBtn.addEventListener("click", () => {
 });
 
 checkupBtn.addEventListener("click", () => {
+	
+	if (checkPasswordInput.length == null) {
+		messageCheckPassword.innerHTML = "";
+		alertCheckPassword.className = "alert";
+		return;
+	}
 
 	let regex = new Array();
 	regex.push("[A-Z]");
