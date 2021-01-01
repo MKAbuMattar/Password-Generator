@@ -11,5 +11,3 @@
 - Lowercase
 - Numbers
 - Symbols
-
-The wrong way to do a good job.
