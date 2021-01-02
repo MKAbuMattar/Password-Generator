@@ -151,7 +151,7 @@ settingsBtn.addEventListener("click", () => {
 
 checkupBtn.addEventListener("click", () => {
 	
-	if (checkPasswordInput.length == null) {
+	if (checkPasswordInput.length == 0) {
 		messageCheckPassword.innerHTML = "";
 		alertCheckPassword.className = "alert";
 		return;
