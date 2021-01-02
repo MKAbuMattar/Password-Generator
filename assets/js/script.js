@@ -130,10 +130,10 @@ function checkPassword(e, backgroundColor, score, feedback) {
 
 	let strength = ['Worst', 'Bad', 'Weak', 'Good', 'Strong'];
 
-	let val = e.value;
+	let password = e.[value];
 	let result = zxcvbn(val);
 
-	if (val !== "") {
+	if (password !== "") {
 		score.innerHTML = strength[result.score];
 		feedback.innerHTML = result.feedback.warning + " " + result.feedback.suggestions;
 
