@@ -52,6 +52,13 @@
                 <button id="copy" class="btn">Copy</button>
             </div>
 
+            <div class="password__box">
+                <p class="password__strength" id="generate__strength">
+                    <span id="generate__strength__score"></span>
+                    <span id="generate__strength__feedback" class='feedback'></span>
+                </p>
+            </div>
+
             <div class="alert__box">
                 <span class="alert" id="alert">
                     <span class="message" id="message"></span>
@@ -107,15 +114,13 @@
                 </div>
             </div>
 
-            <div class="alert__box">
-                <span class="alert" id="alert__check__password">
-                    <span class="message" id="message__check__password"></span>
-                </span>
+            <div class="password__box">
+                <p class="password__strength" id="password__strength">
+                    <span id="password__strength__score"></span>
+                    <span id="password__strength__feedback" class='feedback'></span>
+                </p>
             </div>
 
-            <div class="btn__box">
-                <button id="password__checkup" class="btn btn__block">Password Checkup</button>
-            </div>
         </div>
     </section>
     <footer>
@@ -128,6 +133,9 @@
             <a href="https://mkabumattar.github.io/">MohammadKhaled Abu Mattar</a>
         </p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"
+        integrity="sha512-TZlMGFY9xKj38t/5m2FzJ+RM/aD5alMHDe26p0mYUMoCF5G7ibfHUQILq0qQPV3wlsnCwL+TPRNK4vIWGLOkUQ=="
+        crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 

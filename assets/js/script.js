@@ -12,6 +12,9 @@ const passwordCheckupBox = document.getElementById("password__checkup__box");
 
 const result = document.getElementById("result");
 const copyBtn = document.getElementById("copy");
+const generateStrength = document.getElementById("generate__strength");
+const generateStrengthScore = document.getElementById("generate__strength__score");
+const generateStrengthFeedback = document.getElementById("generate__strength__feedback");
 const alert = document.getElementById("alert");
 const alertMessage = document.getElementById("message");
 const settingsBtn = document.getElementById("settings__btn");
@@ -25,9 +28,10 @@ const customInput = document.getElementById("custom__characters");
 const generateBtn = document.getElementById("generate");
 
 const checkPasswordInput = document.getElementById("check__password");
-const alertCheckPassword = document.getElementById("alert__check__password");
-const messageCheckPassword = document.getElementById("message__check__password");
-const checkupBtn = document.getElementById("password__checkup");
+const passwordStrength = document.getElementById("password__strength");
+const passwordStrengthScore = document.getElementById("password__strength__score");
+const passwordStrengthFeedback = document.getElementById("password__strength__feedback");
+
 
 let passwordLength, endResult, passwordCharSet;
 
@@ -93,40 +97,8 @@ generateBtn.addEventListener("click", () => {
 
 	} else {
 		result.value = endResult;
-
-		let regex = new Array();
-		regex.push("[A-Z]");
-		regex.push("[a-z]");
-		regex.push("[0-9]");
-		regex.push("[$@!%*#?&]");
-
-		let passedword = 0;
-
-		for (var i = 0; i < regex.length; i++) {
-			if (new RegExp(regex[i]).test(endResult)) {
-				passedword++;
-			}
-		}
-
-		alert.className = "alert";
-		switch (passedword) {
-			case 0:
-			case 1:
-			case 2:
-				alertMessage.innerHTML = "Weak Passedword";
-				alert.classList.add("weak");
-				break;
-			case 3:
-				alertMessage.innerHTML = "Medium Passedword";
-				alert.classList.add("medium");
-				break;
-			case 4:
-				alertMessage.innerHTML = "Strong Passedword";
-				alert.classList.add("strong");
-				break;
-		}
+		checkPassword(result, generateStrength, generateStrengthScore, generateStrengthFeedback);
 	}
-
 });
 
 copyBtn.addEventListener("click", () => {
@@ -149,46 +121,47 @@ settingsBtn.addEventListener("click", () => {
 	}
 });
 
-checkupBtn.addEventListener("click", () => {
-	
-	if (checkPasswordInput.length == 0) {
-		messageCheckPassword.innerHTML = "";
-		alertCheckPassword.className = "alert";
-		return;
-	}
+checkPasswordInput.addEventListener("input", function () {
+	checkPassword(checkPasswordInput, passwordStrength, passwordStrengthScore, passwordStrengthFeedback);
+});
 
-	let regex = new Array();
-	regex.push("[A-Z]");
-	regex.push("[a-z]");
-	regex.push("[0-9]");
-	regex.push("[$@!%*#?&]");
 
-	let passedword = 0;
+function checkPassword(e, backgroundColor, score, feedback) {
 
-	for (var i = 0; i < regex.length; i++) {
-		if (new RegExp(regex[i]).test(checkPasswordInput.value)) {
-			passedword++;
+	let strength = ['Worst', 'Bad', 'Weak', 'Good', 'Strong'];
+
+	let val = e.value;
+	let result = zxcvbn(val);
+
+	if (val !== "") {
+		score.innerHTML = strength[result.score];
+		feedback.innerHTML = result.feedback.warning + " " + result.feedback.suggestions;
+
+		backgroundColor.className = "password__strength";
+		switch (result.score) {
+			case 0:
+				backgroundColor.classList.add("worst");
+				break;
+			case 1:
+				backgroundColor.classList.add("bad");
+				break;
+			case 2:
+				backgroundColor.classList.add("weak");
+				break;
+			case 3:
+				backgroundColor.classList.add("good");
+				break;
+			case 4:
+				backgroundColor.classList.add("strong");
+				break;
 		}
 	}
-
-	alertCheckPassword.className = "alert";
-	switch (passedword) {
-		case 0:
-		case 1:
-		case 2:
-			messageCheckPassword.innerHTML = "Weak Passedword";
-			alertCheckPassword.classList.add("weak");
-			break;
-		case 3:
-			messageCheckPassword.innerHTML = "Medium Passedword";
-			alertCheckPassword.classList.add("medium");
-			break;
-		case 4:
-			messageCheckPassword.innerHTML = "Strong Passedword";
-			alertCheckPassword.classList.add("strong");
-			break;
+	else {
+		backgroundColor.className = "password__strength";
+		score.innerHTML = "";
+		feedback.innerHTML = "";
 	}
-});
+}
 
 /*******************************/
 
