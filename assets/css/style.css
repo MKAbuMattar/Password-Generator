@@ -6,12 +6,6 @@
     font-weight: bold;
 }
 
-html,
-body {
-    background: #FBAB7E;
-    background: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
-}
-
 .floating {
     position: fixed;
     right: 24px;
