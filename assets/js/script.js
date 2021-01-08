@@ -1,7 +1,8 @@
+document.title = "Pracryptmate | Password Generator";
 const uppercaseStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZGDJD";
 const lowercaseStr = "abcdefghijklmnopqrstuvwxyzhgsfd";
 const numbersStr = "0123456789635694378265487";
-const symbolstr = "$@!%*#?&";
+const symbolstr = "!\";#$%&\'()*+,-./:;<=>?@[]^_`{|}~";
 
 const passwordGeneratorBtn = document.getElementById("password__generator__btn");
 const passwordCheckupBtn = document.getElementById("password__checkup__btn");
@@ -15,6 +16,8 @@ const copyBtn = document.getElementById("copy");
 const generateStrength = document.getElementById("generate__strength");
 const generateStrengthScore = document.getElementById("generate__strength__score");
 const generateStrengthFeedback = document.getElementById("generate__strength__feedback");
+const generateStrengthFeedbackBtn = document.getElementById("generate__strength__feedback__btn");
+const generateStrengthFeedbackMoreInfo = document.getElementById("generate__strength__feedback__moreinfo");
 const alert = document.getElementById("alert");
 const alertMessage = document.getElementById("message");
 const settingsBtn = document.getElementById("settings__btn");
@@ -31,11 +34,19 @@ const checkPasswordInput = document.getElementById("check__password");
 const passwordStrength = document.getElementById("password__strength");
 const passwordStrengthScore = document.getElementById("password__strength__score");
 const passwordStrengthFeedback = document.getElementById("password__strength__feedback");
+const passwordStrengthFeedbackBtn = document.getElementById("password__strength__feedback__btn");
+const passwordStrengthFeedbackMoreInfo = document.getElementById("password__strength__feedback__moreinfo");
+
+
+const box = document.getElementById("box");
+const infBox = document.getElementById("info__box");
+const exitInfoBtn = document.getElementById("exit__info");
 
 
 let passwordLength, endResult, passwordCharSet;
 
 passwordGeneratorBtn.addEventListener("click", () => {
+	document.title = "Pracryptmate | Password Generator";
 	passwordGeneratorTab.classList.add("active");
 	passwordCheckupTab.classList.remove("active");
 	passwordGeneratorBox.classList.remove("box__hide");
@@ -43,6 +54,7 @@ passwordGeneratorBtn.addEventListener("click", () => {
 });
 
 passwordCheckupBtn.addEventListener("click", () => {
+	document.title = "Pracryptmate | Password Checkup";
 	passwordGeneratorTab.classList.remove("active");
 	passwordCheckupTab.classList.add("active");
 	passwordGeneratorBox.classList.add("box__hide");
@@ -97,7 +109,8 @@ generateBtn.addEventListener("click", () => {
 
 	} else {
 		result.value = endResult;
-		checkPassword(result, generateStrength, generateStrengthScore, generateStrengthFeedback);
+		checkPassword(result, generateStrength, generateStrengthScore, generateStrengthFeedback, generateStrengthFeedbackMoreInfo);
+		generateStrengthFeedbackBtn.classList.remove("info__btn__hide");
 	}
 });
 
@@ -121,21 +134,80 @@ settingsBtn.addEventListener("click", () => {
 	}
 });
 
-checkPasswordInput.addEventListener("input", function () {
-	checkPassword(checkPasswordInput, passwordStrength, passwordStrengthScore, passwordStrengthFeedback);
+generateStrengthFeedbackBtn.addEventListener("click", () => {
+	infBox.classList.remove("box__hide");
+	exitInfoBtn.classList.remove("box__hide");
+	generateStrengthFeedbackMoreInfo.classList.remove("info__hide");
+	passwordStrengthFeedbackMoreInfo.classList.add("info__hide");
+	box.classList.add("box__hide");
+});
+
+passwordStrengthFeedbackBtn.addEventListener("click", () => {
+	infBox.classList.remove("box__hide");
+	exitInfoBtn.classList.remove("box__hide");
+	passwordStrengthFeedbackMoreInfo.classList.remove("info__hide");
+	generateStrengthFeedbackMoreInfo.classList.add("info__hide");
+	box.classList.add("box__hide");
+});
+
+exitInfoBtn.addEventListener("click", () => {
+	infBox.classList.add("box__hide");
+	exitInfoBtn.classList.add("box__hide");
+	generateStrengthFeedbackMoreInfo.classList.add("info__hide");
+	box.classList.remove("box__hide");
 });
 
 
-function checkPassword(e, backgroundColor, score, feedback) {
+checkPasswordInput.addEventListener("input", function () {
+	checkPassword(checkPasswordInput, passwordStrength, passwordStrengthScore, passwordStrengthFeedback, passwordStrengthFeedbackMoreInfo);
+
+	if (checkPasswordInput.value !== "") {
+		passwordStrengthFeedbackBtn.classList.remove("info__btn__hide");
+	} else {
+		passwordStrengthFeedbackBtn.classList.add("info__btn__hide");
+	}
+});
+
+function checkPassword(e, backgroundColor, score, feedback, info) {
+
+	let feedback_tmpl, guess_times_tmpl, props_tmpl, results_tmpl;
+
+	results_tmpl = '{{#results}}\n<table>\n  <tr>\n    <td>Password: </td>\n    <td colspan="2"><strong>{{password}}</strong></td>\n  </tr>\n  <tr>\n    <td>Guesses Log<sub>10</sub>: </td>\n    <td colspan="2">{{guesses_log10}}</td>\n  </tr>\n  <tr>\n    <td>Score: </td>\n    <td>{{score}} / 4</td>\n  <tr>\n    <td>Function Runtime (ms): </td>\n    <td colspan="2">{{calc_time}}</td>\n  </tr>\n  <tr>\n    <td colspan="3">Guess Times:</td>\n  </tr>\n  {{& guess_times_display}}\n  {{& feedback_display }}\n  <tr>\n    <td colspan="3"><strong>Match Sequence:</strong></td>\n  </tr>\n</table>\n{{& sequence_display}}\n{{/results}}';
+
+	guess_times_tmpl = '<tr>\n  <td>100 / hour:</td>\n  <td>{{online_throttling_100_per_hour}}</td>\n  <td> (throttled online attack)</td>\n</tr>\n<tr>\n  <td>10&nbsp; / second:</td>\n  <td>{{online_no_throttling_10_per_second}}</td>\n  <td> (unthrottled online attack)</td>\n</tr>\n<tr>\n  <td>10k / second:</td>\n  <td>{{offline_slow_hashing_1e4_per_second}}</td>\n  <td> (offline attack, slow hash, many cores)</td>\n<tr>\n  <td>10B / second:</td>\n  <td>{{offline_fast_hashing_1e10_per_second}}</td>\n  <td> (offline attack, fast hash, many cores)</td>\n</tr>';
+
+	feedback_tmpl = '{{#warning}}\n<tr>\n  <td>warning: </td>\n  <td colspan="2">{{warning}}</td>\n</tr>\n{{/warning}}\n{{#has_suggestions}}\n<tr>\n  <td style="vertical-align: top">suggestions:</td>\n  <td colspan="2">\n    {{#suggestions}}\n    - {{.}} <br />\n    {{/suggestions}}\n  </td>\n</tr>\n{{/has_suggestions}}';
+
+	props_tmpl = '<div class="match-sequence">\n{{#sequence}}\n<table>\n  <tr>\n    <td colspan="2">\'{{token}}\'</td>\n  </tr>\n  <tr>\n    <td>Pattern:</td>\n    <td>{{pattern}}</td>\n  </tr>\n  <tr>\n    <td>Guesses Log<sub>10</sub>:</td>\n    <td>{{guesses_log10}}</td>\n  </tr>\n  {{#cardinality}}\n  <tr>\n    <td>cardinality:</td>\n    <td>{{cardinality}}</td>\n  </tr>\n  <tr>\n    <td>length:</td>\n    <td>{{length}}</td>\n  </tr>\n  {{/cardinality}}\n  {{#rank}}\n  <tr>\n    <td>Dictionary Name:</td>\n    <td>{{dictionary_name}}</td>\n  </tr>\n  <tr>\n    <td>Rank:</td>\n    <td>{{rank}}</td>\n  </tr>\n  <tr>\n    <td>Reversed:</td>\n    <td>{{reversed}}</td>\n  </tr>\n  {{#l33t}}\n  <tr>\n    <td>l33t subs:</td>\n    <td>{{sub_display}}</td>\n  </tr>\n  <tr>\n    <td>un-l33ted:</td>\n    <td>{{matched_word}}</td>\n  </tr>\n  {{/l33t}}\n  <tr>\n    <td>Base Guesses:</td>\n    <td>{{base_guesses}}</td>\n  </tr>\n  <tr>\n    <td>Uppercase Variations:</td>\n    <td>{{uppercase_variations}}</td>\n  </tr>\n  <tr>\n    <td>l33t-variations:</td>\n    <td>{{l33t_variations}}</td>\n  </tr>\n  {{/rank}}\n  {{#graph}}\n  <tr>\n    <td>graph:</td>\n    <td>{{graph}}</td>\n  </tr>\n  <tr>\n    <td>turns:</td>\n    <td>{{turns}}</td>\n  </tr>\n  <tr>\n    <td>shifted count:</td>\n    <td>{{shifted_count}}</td>\n  </tr>\n  {{/graph}}\n  {{#base_token}}\n  <tr>\n    <td>Base Token:</td>\n    <td>\'{{base_token}}\'</td>\n  </tr>\n  <tr>\n    <td>Base Guesses:</td>\n    <td>{{base_guesses}}</td>\n  </tr>\n  <tr>\n    <td>Number Repeats:</td>\n    <td>{{repeat_count}}</td>\n  </tr>\n  {{/base_token}}\n  {{#sequence_name}}\n  <tr>\n    <td>Sequence Name:</td>\n    <td>{{sequence_name}}</td>\n  </tr>\n  <tr>\n    <td>Sequence Size</td>\n    <td>{{sequence_space}}</td>\n  </tr>\n  <tr>\n    <td>Ascending:</td>\n    <td>{{ascending}}</td>\n  </tr>\n  {{/sequence_name}}\n  {{#regex_name}}\n  <tr>\n    <td>Regex Name:</td>\n    <td>{{regex_name}}</td>\n  </tr>\n  {{/regex_name}}\n  {{#day}}\n  <tr>\n    <td>Day:</td>\n    <td>{{day}}</td>\n  </tr>\n  <tr>\n    <td>Month:</td>\n    <td>{{month}}</td>\n  </tr>\n  <tr>\n    <td>Year:</td>\n    <td>{{year}}</td>\n  </tr>\n  <tr>\n    <td>Separator:</td>\n    <td>\'{{separator}}\'</td>\n  </tr>\n  {{/day}}\n</table>\n{{/sequence}}\n</div>';
+
 
 	let strength = ['Worst', 'Bad', 'Weak', 'Good', 'Strong'];
+
+	let results_lst = [];
 
 	let password = e.value;
 	let result = zxcvbn(password);
 
+	rendered = Mustache.render(results_tmpl, {
+		results: results_lst
+	});
+
 	if (password !== "") {
+
+		result.sequence_display = Mustache.render(props_tmpl, result);
+		result.guess_times_display = Mustache.render(guess_times_tmpl, result.crack_times_display);
+		result.feedback.has_suggestions = result.feedback.suggestions.length > 0;
+		result.feedback_display = Mustache.render(feedback_tmpl, result.feedback);
+		results_lst.push(result);
+
 		score.innerHTML = strength[result.score];
+
+		rendered = Mustache.render(results_tmpl, {
+			results: results_lst
+		});
+
 		feedback.innerHTML = result.feedback.warning + " " + result.feedback.suggestions;
+		info.innerHTML = rendered;
 
 		backgroundColor.className = "password__strength";
 		switch (result.score) {

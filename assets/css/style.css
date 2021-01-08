@@ -9,8 +9,9 @@
 .floating {
     position: fixed;
     right: 24px;
+    top: 24px;
     transition: all 500ms ease 0s;
-    z-index: 7;
+    z-index: 99;
     display: flex;
     flex-direction: column;
     -webkit-box-pack: end;
@@ -118,12 +119,26 @@
     clear: both;
 }
 
-.title h1 {
+.title h1,
+.title h2 {
     display: block;
     padding: 15px;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
     color: rgba(255, 255, 255, 1);
+}
+
+.title h1 {}
+
+.title h1 span {
+    background-color: #FF9A8B;
+    background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title h2 {
+    font-size: 1.4rem;
 }
 
 .result__box {
@@ -142,18 +157,73 @@
     overflow: auto;
     padding: 10px 7px;
     font-size: 17px;
-    z-index: 10;
+    z-index: 1;
     color: white;
     border: none;
     outline: none;
 }
 
 .password__box {
+    margin: 25px 0 0 0;
     display: flex;
     justify-content: center;
     user-select: none;
 }
 
+.password__box p span {
+    display: block;
+}
+
+.info {
+    color: rgba(255, 255, 255, 1)
+}
+
+.info.info__hide,
+.info__btn__hide {
+    display: none;
+}
+
+.btn.info__btn {
+    width: 45px;
+}
+
+.btn.btn__exit__info {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    user-select: none;
+    pointer-events: all;
+    border: 2px white solid;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    background-color: #FF9A8B;
+    background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+}
+
+.info__btn svg,
+.btn__exit__info svg {
+    display: block;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.match-sequence table {
+    display: inline;
+    margin-right: 30px;
+}
+
+.match-sequence>table:nth-child(odd) {
+    background-color: rgba(117, 117, 117, 1.0)
+}
+
+.match-sequence>table:nth-child(even) {
+    background-color: rgba(158, 158, 158, 1.0)
+}
+
+#examples-container {
+    margin-top: 200px;
+}
 
 .password__strength {
     color: white;
@@ -168,7 +238,6 @@
 .password__strength.worst {
     padding: 15px;
     display: block;
-    text-align: center;
     width: 100%;
 }
 

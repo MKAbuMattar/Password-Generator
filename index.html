@@ -2,22 +2,10 @@
 <html lang="en">
 
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0CMCCPTP5Y"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-0CMCCPTP5Y');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Password Generator</title>
+    <title>Pracryptmate</title>
 
     <meta name="description" content="Password Generator">
     <meta name="robots" content="index, follow">
@@ -33,7 +21,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body>
+<body class="">
     <div class="stars__box">
         <div id='stars'></div>
         <div id='stars2'></div>
@@ -50,96 +38,134 @@
     </div>
 
     <section class="box">
-        <ul class="tab__group">
-            <li class="tab active" id="password__generator__tab">
-                <button class="btn tab__btn" id="password__generator__btn">Password Generator</button>
-            </li>
-            <li class="tab" id="password__checkup__tab">
-                <button class="btn tab__btn" id="password__checkup__btn">Password Checkup</button>
-            </li>
-        </ul>
+        <button class="btn btn__exit__info box__hide" id="exit__info">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+                stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="title">
+            <h1>Pracrypt<span>mate</span></h1>
+        </div>
+        <div id="box">
+            <ul class="tab__group">
+                <li class="tab active" id="password__generator__tab">
+                    <button class="btn tab__btn" id="password__generator__btn">Password Generator</button>
+                </li>
+                <li class="tab" id="password__checkup__tab">
+                    <button class="btn tab__btn" id="password__checkup__btn">Password Checkup</button>
+                </li>
+            </ul>
 
-        <div id="password__generator__box">
+            <div id="password__generator__box">
 
-            <div class="title">
-                <h1>Password Generator</h1>
+                <div class="title">
+                    <h2>Password Generator</h2>
+                </div>
+
+                <div class="result__box">
+                    <input type="text" id="result" placeholder="New Password Generator" readonly>
+                    <button id="copy" class="btn">Copy</button>
+                </div>
+
+                <div class="password__box">
+                    <p class="password__strength" id="generate__strength">
+                        <span id="generate__strength__score"></span>
+                        <span id="generate__strength__feedback" class='feedback'></span>
+                    </p>
+                    <button id="generate__strength__feedback__btn" class="btn info__btn info__btn__hide"
+                        title="Show More Info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none"
+                            stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="alert__box">
+                    <span class="alert" id="alert">
+                        <span class="message" id="message"></span>
+                    </span>
+                </div>
+
+                <div class="btn__settings">
+                    <button id="settings__btn" class="btn">Settings</button>
+                </div>
+
+                <div class="items items__hide" id="settings">
+                    <div class="item">
+                        <label>Password Length :</label>
+                        <input type="number" placeholder="Password Length" min="6" value="20" id="password__length">
+                    </div>
+                    <div class="item">
+                        <label for="uppercase">Include Uppercase :</label>
+                        <input type="checkbox" id="uppercase" checked>
+                    </div>
+                    <div class="item">
+                        <label for="lowercase">Include Lowercase :</label>
+                        <input type="checkbox" id="lowercase" checked>
+                    </div>
+                    <div class="item">
+                        <label for="numbers">Include Numbers :</label>
+                        <input type="checkbox" id="numbers" checked>
+                    </div>
+                    <div class="item">
+                        <label for="symbols">Include Symbols :</label>
+                        <input type="checkbox" id="symbols" checked>
+                    </div>
+                    <div class="item">
+                        <label>Custom Characters :</label>
+                        <input type="text" placeholder="Custom Characters" id="custom__characters">
+                    </div>
+                </div>
+
+                <div class="btn__box">
+                    <button id="generate" class="btn btn__block">Generate Password</button>
+                </div>
             </div>
 
-            <div class="result__box">
-                <input type="text" id="result" placeholder="New Password Generator" readonly="">
-                <button id="copy" class="btn">Copy</button>
-            </div>
+            <div id="password__checkup__box" class="box__hide">
 
-            <div class="password__box">
-                <p class="password__strength" id="generate__strength">
-                    <span id="generate__strength__score"></span>
-                    <span id="generate__strength__feedback" class='feedback'></span>
-                </p>
-            </div>
+                <div class="title">
+                    <h2>Password Checkup</h2>
+                </div>
 
-            <div class="alert__box">
-                <span class="alert" id="alert">
-                    <span class="message" id="message"></span>
-                </span>
-            </div>
+                <div class="items">
+                    <div class="item">
+                        <label>Enter Password:</label>
+                        <input type="text" placeholder="Enter Password" id="check__password">
+                    </div>
+                </div>
 
-            <div class="btn__settings">
-                <button id="settings__btn" class="btn">Settings</button>
-            </div>
-
-            <div class="items items__hide" id="settings">
-                <div class="item">
-                    <label>Password Length :</label>
-                    <input type="number" placeholder="Password Length" min="6" value="20" id="password__length">
+                <div class="password__box">
+                    <p class="password__strength" id="password__strength">
+                        <span id="password__strength__score"></span>
+                        <span id="password__strength__feedback" class='feedback'></span>
+                    </p>
+                    <button id="password__strength__feedback__btn" class="btn info__btn info__btn__hide"
+                        title="Show More Info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none"
+                            stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </button>
                 </div>
-                <div class="item">
-                    <label for="uppercase">Include Uppercase :</label>
-                    <input type="checkbox" id="uppercase" checked>
-                </div>
-                <div class="item">
-                    <label for="lowercase">Include Lowercase :</label>
-                    <input type="checkbox" id="lowercase" checked>
-                </div>
-                <div class="item">
-                    <label for="numbers">Include Numbers :</label>
-                    <input type="checkbox" id="numbers" checked>
-                </div>
-                <div class="item">
-                    <label for="symbols">Include Symbols :</label>
-                    <input type="checkbox" id="symbols" checked>
-                </div>
-                <div class="item">
-                    <label>Custom Characters :</label>
-                    <input type="text" placeholder="Custom Characters" id="custom__characters">
-                </div>
-            </div>
-
-            <div class="btn__box">
-                <button id="generate" class="btn btn__block">Generate Password</button>
             </div>
         </div>
 
-        <div id="password__checkup__box" class="box__hide">
-
+        <div id="info__box" class="box__hide">
             <div class="title">
-                <h1>Password Checkup</h1>
+                <h2>Password Information</h2>
             </div>
-
-            <div class="items">
-                <div class="item">
-                    <label>Enter Password:</label>
-                    <input type="text" placeholder="Enter Password" id="check__password">
-                </div>
-            </div>
-
-            <div class="password__box">
-                <p class="password__strength" id="password__strength">
-                    <span id="password__strength__score"></span>
-                    <span id="password__strength__feedback" class='feedback'></span>
-                </p>
-            </div>
-
+            <div id="generate__strength__feedback__moreinfo" class='info info__hide'></div>
+            <div id="password__strength__feedback__moreinfo" class='info info__hide'></div>
         </div>
+
     </section>
     <footer>
         <p>
@@ -151,9 +177,11 @@
             <a href="https://mkabumattar.github.io/">MohammadKhaled Abu Mattar</a>
         </p>
     </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"
         integrity="sha512-TZlMGFY9xKj38t/5m2FzJ+RM/aD5alMHDe26p0mYUMoCF5G7ibfHUQILq0qQPV3wlsnCwL+TPRNK4vIWGLOkUQ=="
         crossorigin="anonymous"></script>
+    <script src="./assets/js/mustache.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
