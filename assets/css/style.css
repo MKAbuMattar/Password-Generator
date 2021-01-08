@@ -170,10 +170,6 @@
     user-select: none;
 }
 
-.password__box p span {
-    display: block;
-}
-
 .info {
     color: rgba(255, 255, 255, 1)
 }
