@@ -2,7 +2,9 @@ const cacheName = 'password-generator-v3';
 const staticAssets = [
     './',
     './index.html',
+    './assets/css/background-style.css',
     './assets/css/style.css',
+    './assets/js/mustache.js',
     './assets/js/script.js',
 ];
 
