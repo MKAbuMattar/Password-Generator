@@ -4,6 +4,7 @@ const staticAssets = [
     './index.html',
     './assets/css/background-style.css',
     './assets/css/style.css',
+    './assets/js/zxcvbn.js',
     './assets/js/mustache.js',
     './assets/js/script.js',
 ];
