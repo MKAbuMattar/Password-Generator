@@ -5,7 +5,6 @@ const staticAssets = [
     './assets/css/background-style.css',
     './assets/css/style.css',
     './assets/js/zxcvbn.js',
-    './assets/js/_prelude.js',
     './assets/js/src/adjacency_graphs.coffee',
     './assets/js/src/feedback.coffee',
     './assets/js/src/frequency_lists.coffee',
