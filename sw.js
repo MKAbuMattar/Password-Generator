@@ -5,13 +5,6 @@ const staticAssets = [
     './assets/css/background-style.css',
     './assets/css/style.css',
     './assets/js/zxcvbn.js',
-    './assets/js/src/adjacency_graphs.coffee',
-    './assets/js/src/feedback.coffee',
-    './assets/js/src/frequency_lists.coffee',
-    './assets/js/src/main.coffee',
-    './assets/js/src/matching.coffee',
-    './assets/js/src/scoring.coffee',
-    './assets/js/src/time_estimates.coffee',
     './assets/js/mustache.js',
     './assets/js/script.js',
 ];
