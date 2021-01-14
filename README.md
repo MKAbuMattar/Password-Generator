@@ -14,4 +14,4 @@ For more info about [zxcvbn](https://github.com/dropbox/zxcvbn/blob/master/READM
 
 **mustache.js is a zero-dependency implementation of the mustache template system in JavaScript.** For more info about [mustache.js](https://github.com/janl/mustache.js/blob/master/README.md)
 
-### Easy way to password generator
+### Easy way to generate a password
